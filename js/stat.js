@@ -17,8 +17,6 @@ window.renderStatistics = function (ctx, names, times) {
         max = -1,
         min = -1;
 
-    console.log(times);
-
     //Сортируем копию массива times
     function compareNumeric(a, b) {
         return a - b;
@@ -52,5 +50,4 @@ window.renderStatistics = function (ctx, names, times) {
         ctx.fillText(names[i], 210 + pos, 275);
         pos += 90;
     }
-    this.console.log(times);
 };
