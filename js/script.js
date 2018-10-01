@@ -1,21 +1,24 @@
 'use strict';
 
-var fireballSize = 22;
-var wizardSpeed = 3;
-var wizardWidth = 70;
-var getWizardHeigth = function (wizardWidth) {
-    return 1.337 * wizardWidth;
-};
+(function () { //IIFE для модуля
+    var fireballSize = 22,
+        wizardSpeed = 3,
+        wizardWidth = 70;
 
-var getFireballSpeed = function (left) {
-    var result = left ? 5 : 2;
-    return result;
-};
+    function getWizardHeigth(wizardWidth) {
+        return 1.337 * wizardWidth;
+    }
 
-var getWizardX = function (width) {
-    return width / 2;
-};
+    function getFireballSpeed(left) {
+        var result = left ? 5 : 2;
+        return result;
+    }
 
-var getWizardY = function (height) {
-    return height / 3 * 2;
-};
+    function getWizardX(width) {
+        return width / 2;
+    }
+
+    function getWizardY(height) {
+        return height / 3 * 2;
+    }
+}());
