@@ -8,18 +8,18 @@ var gulp = require('gulp'),
 //-------------------SCRIPTS-------------------//
 /////////////////////////////////////////////////
 
-gulp.task('scripts', function () {
+gulp.task('scripts', function() {
   return gulp.src('js/*.js')
     .pipe(glp.plumber({
-      errorHandler: glp.notify.onError(function (err) {
+      errorHandler: glp.notify.onError(function(err) {
         return {
           title: 'js:include',
-          message: err.message
+          message: err.message,
         };
       })
     }))
     .pipe(browserSync.reload({
-      stream: true
+      stream: true,
     }));
 });
 
@@ -27,7 +27,7 @@ gulp.task('scripts', function () {
 //--------------------WATCH--------------------//
 /////////////////////////////////////////////////
 
-gulp.task('watch', function () {
+gulp.task('watch', function() {
   gulp.watch('js/*.js', gulp.series('scripts'));
 });
 
@@ -35,10 +35,10 @@ gulp.task('watch', function () {
 //--------------------SERVE--------------------//
 /////////////////////////////////////////////////
 
-gulp.task('serve', function () {
+gulp.task('serve', function() {
   browserSync.init({
     server: {
-      baseDir: "./"
+      baseDir: './',
     }
   });
 });
