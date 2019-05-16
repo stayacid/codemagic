@@ -30,6 +30,7 @@ window.renderStatistics = function(ctx, names, times) {
 
     h += 20;
     //ctx.fillText(time, 120, h);
+    //dfg
 
   };
 
