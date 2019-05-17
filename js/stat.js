@@ -2,11 +2,11 @@
 
 window.renderStatistics = function(ctx, names, times) {
   // position in px
-  const initialX = 120; //horizontal text positioning
-   let initialY = 40,
-        barHeight = 20,
-        indent = 40,
-        lineHeight = 15;
+  let initialX = 120; // start horizontal text positioning
+  let initialY = 40;
+  const barWidth = 40;
+  const indent = 50;
+  const lineHeight = 15;
 
   // draw statistics field shadow
   ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
@@ -22,20 +22,20 @@ window.renderStatistics = function(ctx, names, times) {
   ctx.fillText('Ура вы победили!', initialX, initialY);
 
   // move line down
-  initialY += barHeight;
+  initialY += lineHeight;
 
   // text
   ctx.fillText('Список результатов:', initialX, initialY);
 
-  //return max element from array
-  let getMaxElement = function(arr) {
-    let arrMax = {
+  // return max element from array
+  const GetMaxElement = function(arr) {
+    const arrMax = {
       max: -1,
       maxIndex: -1,
     };
 
     for (let i = 0; i < arr.length; i++) {
-      let time = arr[i];
+      const time = arr[i];
 
       if (time > arrMax.max) {
         arrMax.max = time; // time
@@ -47,24 +47,42 @@ window.renderStatistics = function(ctx, names, times) {
 
   // get max time from [times] and it's index
   // если надо вернуть объект из функции, то это делается через new
-  let timesMax = new getMaxElement(times);
-
-  //
-  const histogramWidth = 150;
-  const step = histogramWidth / (timesMax.max - 0); // replace zero by minimum value from [times]
+  const timesMax = new GetMaxElement(times);
 
   // move line down
-  initialY += barHeight;
+  initialY += lineHeight;
 
-  ctx.fillText('Худшее время: ' + timesMax.max.toFixed(2) + 'мс у игрока ' + names[timesMax.maxIndex], initialX, initialY);
+  ctx.fillText('Худшее время: ' + timesMax.max.toFixed(0) + 'мс у игрока ' + names[timesMax.maxIndex], initialX, initialY);
 
   // move line down
   initialY += lineHeight;
 
   // draw graphic
   for (let i = 0; i < times.length; i++) {
-    initialY += 5; 
-    ctx.fillRect(initialX, initialY + indent * i, times[i] * step, barHeight);
-    ctx.fillText(names[i], initialX + histogramWidth + barHeight, initialY + barHeight + indent * i);
+    const endY = 260;
+    const barHeight = 150 * times[i] / timesMax.max;
+
+    // draw a bar
+    // get random opacity
+    let randomOpacity = Math.floor(Math.random() * 10) / 10;
+    if (randomOpacity == 0) {
+      randomOpacity = 0.1;
+    }
+
+    ctx.fillStyle = 'rgba(0, 116, 217, ' + randomOpacity + ')';
+
+    // find index of 'Вы' in array
+    const you = names.indexOf('Вы');
+    // draw this bar red
+    if (i == you) {
+      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
+    }
+
+    ctx.fillRect(initialX, endY - 20, barWidth, -barHeight);
+
+    // write a text
+    ctx.fillStyle = '#000';
+    ctx.fillText(names[i], initialX, endY);
+    initialX += barWidth + indent;
   }
 };
