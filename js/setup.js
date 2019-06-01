@@ -38,8 +38,10 @@ for (let i = 0; i < 4; i++) {
   const wizardElement = similarWizardTemplate.cloneNode(true);
   // append random name and surname
   wizardElement.querySelector('.setup-similar-label').textContent = names[randomNumber(0, names)] + ' ' + surnames[randomNumber(0, surnames)];
-  // add random color
+  // add random coat color
   wizardElement.querySelector('.wizard-coat').style.fill = coatColors[randomNumber(0, coatColors)];
+  // add random eyes color
+  wizardElement.querySelector('.wizard-eyes').style.fill = eyesColors[randomNumber(0, eyesColors)];
   // append template
   fragment.appendChild(wizardElement);
 };
