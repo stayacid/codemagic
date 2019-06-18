@@ -3,22 +3,49 @@
 // close and open window
 const setupBtn = document.querySelector('.setup-open');
 const closeBtn = document.querySelector('.setup-close');
+const enterKeyCode = 13;
+const escKeyCode = 27;
 
 
+// open modal
 setupBtn.addEventListener('click', () => {
   toggleModal();
 });
 
+setupBtn.addEventListener('keydown', (e) => {
+  if (e.keyCode === enterKeyCode) {
+    toggleModal();
+  }
+});
+
 closeBtn.addEventListener('click', () => {
-  toggleModal();
+  closeModal();
+});
+
+closeBtn.addEventListener('keydown', (e) => {
+  if (e.keyCode === enterKeyCode) {
+    closeModal();
+  }
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.keyCode === escKeyCode) {
+    closeModal();
+  }
 });
 
 const toggleModal = () => {
   document.querySelector('.overlay').classList.toggle('hidden');
-  document.querySelector('.setup-similar').classList.toggle('hidden');
 };
 
+const closeModal = () => {
+  document.querySelector('.overlay').classList.add('hidden');
+};
+
+
+
 // clone and append template to similar list
+document.querySelector('.setup-similar').classList.remove('hidden');
 const similarListElement = document.querySelector('.setup-similar-list');
 const similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 const names = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
