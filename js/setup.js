@@ -7,6 +7,15 @@ const randomNumber = (min, max) => {
   return rand;
 };
 
+// make counter
+function makeCounter() {
+  function counter() {
+    return counter.currentCount++;
+  };
+  counter.currentCount = 0;
+  return counter;
+}
+
 // close and open window
 const setupBtn = document.querySelector('.setup-open');
 const closeBtn = document.querySelector('.setup-close');
@@ -55,33 +64,51 @@ const closeModal = () => {
 };
 
 // changing colors on click on wizard
-// change color of item by random number from array
-let arrCounter = 0;
-const changeFillColor = (item, arr) => {
-  item.style.fill = arr[arrCounter];
-  arrCounter++;
-  arrCounter >= arr.length ? arrCounter = 0 : false;
+const changeFillColor = (count, item, arr) => {
+  item.style.fill = arr[count];
 };
-const changeBgColor = (item, arr) => {
-  item.style.background = arr[randomNumber(0, arr.length - 1)];
+
+const changeBgColor = (count, item, arr) => {
+  item.style.background = arr[count];
 };
 
 // change coat color on click
 const coatColor = setupModal.querySelector('.setup-wizard .wizard-coat');
+// make counter for changing colors by order
+const coatColorCounter = makeCounter();
 coatColor.addEventListener('click', function() {
-  changeFillColor(coatColor, coatColors);
+  coatColorCounter();
+  // reset counter if it bigger than array
+  if (coatColorCounter.currentCount >= coatColors.length) {
+    coatColorCounter.currentCount = 0;
+  }
+  changeFillColor(coatColorCounter.currentCount, coatColor, coatColors);
 });
 
 // changing eyes color on click
 const eyesColor = setupModal.querySelector('.setup-wizard .wizard-eyes');
+// make counter for changing colors by order
+const eyesColorCounter = makeCounter();
 eyesColor.addEventListener('click', function() {
-  changeFillColor(eyesColor, eyesColors);
+  eyesColorCounter();
+  // reset counter if it bigger than array
+  if (eyesColorCounter.currentCount >= eyesColors.length) {
+    eyesColorCounter.currentCount = 0;
+  }
+  changeFillColor(eyesColorCounter.currentCount, eyesColor, eyesColors);
 });
 
 // changing fireball color on click
 const fireballColor = setupModal.querySelector('.setup-fireball-wrap');
+// make counter for changing colors by order
+const fireballColorCounter = makeCounter();
 fireballColor.addEventListener('click', function() {
-  changeBgColor(fireballColor, fireballColors);
+  fireballColorCounter();
+  // reset counter if it bigger than array
+  if (fireballColorCounter.currentCount >= eyesColors.length) {
+    fireballColorCounter.currentCount = 0;
+  }
+  changeBgColor(fireballColorCounter.currentCount, fireballColor, fireballColors);
 });
 
 

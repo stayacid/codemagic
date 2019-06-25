@@ -13,6 +13,6 @@ module.exports = {
     'ecmaVersion': 2018,
   },
   'rules': {
-    'linebreak-style': ["error", "windows"]
+    //'linebreak-style': ["error", "windows"]
   },
 };
